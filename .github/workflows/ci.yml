@@ -8,34 +8,29 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13"]
 
     steps:
-      # Step 1: Download your repository
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # Step 2: Install Python
       - name: Setup Python
         uses: actions/setup-python@v5
         with:
-          python-version: "3.13"
+          python-version: ${{ matrix.python-version }}
 
-      # Step 3: Upgrade pip
       - name: Upgrade pip
         run: python -m pip install --upgrade pip
 
-      # Step 4: Install project dependencies
       - name: Install dependencies
         run: |
           pip install -e .
           pip install pytest ruff
 
-      # Step 5: Run lint on Pull Request
       - name: Run lint
-        run: |
-          ruff check .
+        run: ruff check .
 
-      # Step 6: Run tests on Pull Request
       - name: Run tests
-        run: |
-          pytest
+        run: pytest -v
