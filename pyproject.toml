@@ -1,9 +1,10 @@
 [project]
 name = "LMS"
 version = "0.1.0"
-description = "Add your description here"
+description = "LMS is a two weeks hands-on project for SPM, Git, Docker, Testing, Database, FastApi understanding."
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
     "pytest>=9.1.1",
+    "ruff>=0.15.20",
 ]
